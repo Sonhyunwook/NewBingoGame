@@ -1,0 +1,104 @@
+
+	static class MainFrame extends Frame implements MouseListener {
+		Label lbl;
+		Label lbl2;
+		Label lbl3;
+		
+		BufferedImage image = null;
+
+		 MainFrame() {
+			super("창 전환 1번 프레임");
+			this.setVisible(true);
+			this.setBounds(700, 400, 300, 300);
+			this.setLayout(null);
+			this.addWindowListener(new MyWinExit());
+			
+			lbl = new Label("START", 1);
+			lbl2 = new Label("HARD MODE", 1);
+			lbl3 = new Label("CHALLENGE", 1);
+			
+			lbl.setBackground(Color.cyan);
+			lbl.setBounds(80, 165, 130, 25);
+			add(lbl);
+			lbl.addMouseListener(this);
+			
+			lbl2.setBackground(Color.RED);
+			lbl2.setBounds(80, 200, 130, 25);
+			add(lbl2);
+			//연결해야함
+			
+			lbl3.setBackground(Color.LIGHT_GRAY);
+			lbl3.setBounds(80, 235, 130, 25);
+			add(lbl3);
+			//연결해야함
+			
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setSize(400,500);
+			layeredPane.setLayout(null);
+			
+//			File file = new File("./Image/" + filename);
+//			try {
+//				
+//				image = ImageIO.read(new File("./Image/" + filename));
+//			}catch (IOException e){
+//				JOptionPane.showMessageDialog(null, "이미지 불러오기 실패");
+//				System.exit(0);
+//			}
+			
+			
+			myPanel panel = new myPanel();
+			panel.setSize(300,300);
+			layeredPane.add(panel);
+			
+			setLayout(null);
+			
+			add(layeredPane);
+			
+			setVisible(true);
+			setResizable(false); //창크기 수정불가
+		}
+		
+		class myPanel extends JPanel {
+	   
+		public void paint(Graphics g) {// paint() 메소드 구현
+			Font font = new Font("한양 해서", Font.BOLD, 30);
+			g.setFont(font);
+			g.drawString("Bingo Game", 60, 100);
+		}
+		}
+
+		// 윈도우 종료 클래스
+		public class MyWinExit extends WindowAdapter {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0); // 윈도 종료
+			}
+		}
+
+		@Override // 마우스 이벤트 인터페이스 구현
+		public void mouseClicked(MouseEvent e) {
+			new MyFrame("Bingo!"); // 여기가 프레임 전환 역할
+			this.setVisible(false);
+		}
+
+		@Override // 마우스 이벤트 인터페이스 구현
+		public void mousePressed(MouseEvent e) {
+			/* 구현생략 */}
+
+		@Override // 마우스 이벤트 인터페이스 구현
+		public void mouseReleased(MouseEvent e) {
+			/* 구현생략 */}
+
+		@Override // 마우스 이벤트 인터페이스 구현
+		public void mouseEntered(MouseEvent e) {
+			/* 구현생략 */}
+
+		@Override // 마우스 이벤트 인터페이스 구현
+		public void mouseExited(MouseEvent e) {
+			/* 구현생략 */}
+	}// 첫 번째 프레임 끝
+
+	public static void main(String[] args) {
+		// new MyFrame("Bingo Game");
+		new MainFrame();
+	}
+}
